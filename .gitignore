@@ -1,0 +1,15 @@
+# CMake build directories
+build/
+cmake-build-*/
+
+# Python virtual environments and cache
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
