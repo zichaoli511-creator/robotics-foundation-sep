@@ -1,0 +1,65 @@
+#include <cmath>
+#include <cstddef>
+#include <iostream>
+#include <map>
+#include <numeric>
+#include <string>
+#include <vector>
+
+int main() {
+    std::map<std::string, std::vector<double>> joint_data;
+
+    joint_data["joint_1"] = {10.0, 12.0, 14.0, 50.0};
+    joint_data["joint_2"] = {20.0, 19.0, 21.0, 22.0};
+    joint_data["joint_3"] = {-5.0, -2.0, 0.0, 30.0};
+    joint_data["joint_4"] = {30.0, 30.5, 31.0, 29.5};
+    joint_data["joint_5"] = {45.0, 44.0, 46.0, 100.0};
+    joint_data["joint_6"] = {0.0, 5.0, -5.0, 40.0};
+
+    double threshold = 20.0;
+
+    for (const auto& item : joint_data) {
+        const std::string& joint_name = item.first;
+        const std::vector<double>& angles = item.second;
+
+        if (angles.empty()) {
+            std::cout << joint_name << " 没有数据\n";
+            continue;
+        }
+
+        double sum = std::accumulate(
+            angles.begin(),
+            angles.end(),
+            0.0
+        );
+
+        double average = sum / angles.size();
+        bool found_abnormal = false;
+
+        std::cout << joint_name
+                  << "，平均值: "
+                  << average
+                  << '\n';
+
+        for (std::size_t i = 0; i < angles.size(); ++i) {
+            double deviation = std::abs(angles[i] - average);
+
+            if (deviation > threshold) {
+                found_abnormal = true;
+
+                std::cout << "  发现异常点\n";
+                std::cout << "    样本编号: " << i + 1 << '\n';
+                std::cout << "    索引: " << i << '\n';
+                std::cout << "    角度: " << angles[i] << '\n';
+                std::cout << "    与平均值的偏差: "
+                          << deviation << '\n';
+            }
+        }
+
+        if (!found_abnormal) {
+            std::cout << "  没有发现异常点\n";
+        }
+    }
+
+    return 0;
+}
