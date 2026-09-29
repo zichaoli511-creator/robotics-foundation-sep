@@ -52,7 +52,7 @@ robotics-foundation-sep/
 - [C++ 练习索引](c++/README.md)
 - [轨迹项目与结果说明](trajectory_project/README.md)
 - [从基础到真机的学习复盘](docs/learning-journey.md)
-- [环境与工具学习记录](docs/2026-09-15-environment-setup.md)
+- [环境与工具学习记录](docs/environment-setup.md)
 
 
 ## 简短运行方式
